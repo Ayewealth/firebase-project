@@ -3,7 +3,7 @@ import { db } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import Post from "./post";
 
-export interface Post {
+export interface PostInterface {
   id: string;
   userId: string;
   title: string;
@@ -13,13 +13,13 @@ export interface Post {
 
 const main = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [postList, setPostList] = useState<Post[] | null>(null);
+  const [postList, setPostList] = useState<PostInterface[] | null>(null);
   const postRef = collection(db, "post");
 
   const getPosts = async () => {
     const data = await getDocs(postRef);
     setPostList(
-      data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Post[]
+      data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as PostInterface[]
     );
   };
 
